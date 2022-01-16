@@ -16,8 +16,39 @@
         <h1 class="title">Tic-Tac-Toe</h1>
     </div>
 
-    <div class="main">
+    <div class="main">  
+        <div class="setup">
+            <!-- Player count select  -->
+            <div id="player-count">
+                <div class="left-msg">Single Player</div>
+                <label class="switch"> 
+                    <input type="checkbox" id="player-toggle">
+                    <span class="slider"></span>
+                </label>
+                <div class="right-msg">Two Players</div>
+            </div>
 
+            <!-- AI select  -->
+            <div id="ai-select">
+                <div class="left-msg">AI Enable</div>
+                <label class="switch">
+                    <input type="checkbox" id="ai-toggle">
+                    <span class="slider"></span>
+                </label>
+                <div class="right-msg">AI Disable</div>
+            </div>
+        </div>
+        <div id="gameboard">
+            <div data-top-left class="square" id="00"></div>
+            <div data-top-mid class="square" id="01"></div>
+            <div data-top-right class="square" id="02"></div>
+            <div data-mid-left class="square" id="10"></div>
+            <div data-mid-mid class="square" id="11"></div>
+            <div data-mid-right class="square" id="12"></div>
+            <div data-bot-left class="square" id="20"></div>
+            <div data-bot-mid class="square" id="21"></div>
+            <div data-bit-right class="square" id="22"></div>
+        </div>
     </div>
 
     <div class="footer">

@@ -6,18 +6,14 @@
     --header-font: 34px;
     --title-1-font: 18px;
     --body-font: 14px;
+
+    --square-size: 150px;
 }
 
 body {
     font-family: Roboto, sans-serif;
     background-color: var(--background-grey);
     color: var(--primary-dark);
-
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    min-height: 100vh;
-    margin: 0;
 }
 
 .header {
@@ -36,11 +32,114 @@ h1 {
 /* Main */
 .main {
     display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 100px;
+    max-width: 1270px;
+    margin: auto;
+    padding-bottom: 60px;
+}
+
+p {
+    margin: 0px;
+}
+
+/* Player and AI selection */
+.setup {
+    display: flex;
     flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 20px;
+    width: 300px;
+}
+
+#player-count, #ai-select {
+    display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
-    padding-bottom: 60px;
+    width: 300px;
+}
+
+.inactive {
+    visibility: hidden;
+}
+
+.left-msg, .right-msg {
+    display: flex;
+    flex: 1;
+}
+
+.left-msg {
+    justify-content: flex-end;
+}
+
+.right-msg {
+    justify-content: flex-start;
+}
+
+.switch {
+    position: relative;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    visibility: hidden;
+}
+
+.slider {
+    position: absolute;
+    background-color: lightgray;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 34px;
+    cursor: pointer;
+    transition: 100ms;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    background-color: white;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    bottom: 4px;
+    left: 4px;
+    transition: 100ms;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Gameboard  */
+#gameboard {
+    position: relative;
+    top: 80px;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, var(--square-size));
+    grid-template-rows: repeat(3, var(--square-size));
+    gap: 10px;
+    background-color: darkgrey;
+}
+
+.square {
+    width: var(--square-size);
+    height: var(--square-size);
+    background-color: var(--background-grey);
+    /* border: 1px solid black; */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--header-font);
+
 }
 
 /* Footer */
