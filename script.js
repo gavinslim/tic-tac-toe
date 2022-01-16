@@ -111,6 +111,53 @@ const gameboard = (() => {
             child1.classList.add('fas', 'fa-circle', 'smaller');
             parent.appendChild(child1);
         }
+
+        gameboard.print();
+    }
+
+    function look_around(row, col, marker) {
+        let min_row, max_row, min_col, max_col;
+        if (row == 0) {
+            min_row = 0;
+            max_row = row + 1;
+        } else if (row == 2) {
+            min_row = row - 1;
+            max_row = 2;
+        } else {
+            min_row = row - 1;
+            max_row = row + 1;
+        }
+
+        if (col == 0) {
+            min_col = 0;
+            max_col = col + 1;
+        } else if (col == 2) {
+            min_col = col - 1;
+            max_col = 2;
+        } else {
+            min_col = col - 1;
+            max_col = col + 1;
+        }
+
+        if (_board[row][col] != marker) {
+            return false;
+        } 
+
+        for (let i = min_row; i = max_row; i++) {
+            for (let j = min_col; j = max_col; j++) {
+                return look_around(i, j, marker)
+            }
+        }
+    }
+
+    const check = (row, col) => {
+        // Look around
+
+        // for(let i = 0; i < 3; i++) {
+        //     for(let j = 0; j < 3; j++) {
+                
+        //     }
+        // }
     }
 
     return {reset, activate, print, mark};
@@ -118,7 +165,6 @@ const gameboard = (() => {
 })();
 
 const Player = (name) => {
-    // <i class="fas fa-times"></i>
 
     var active = false;
 
