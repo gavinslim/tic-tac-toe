@@ -34,8 +34,8 @@ h1 {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 100px;
-    max-width: 1270px;
+    gap: 70px;
+    max-width: 1250px;
     margin: auto;
     padding-bottom: 60px;
 }
@@ -44,12 +44,30 @@ p {
     margin: 0px;
 }
 
+button {
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--primary-dark);
+    color: var(--background-grey);
+    font-size: var(--body-font);
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--background-grey);
+    border: 1px solid var(--primary-dark);
+    color: var(--primary-dark);
+}
+
 /* Player and AI selection */
 .setup {
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
+    padding-left: 20px;
     gap: 20px;
     width: 300px;
 }
@@ -133,13 +151,28 @@ input:checked + .slider:before {
     width: var(--square-size);
     height: var(--square-size);
     background-color: var(--background-grey);
-    /* border: 1px solid black; */
+    cursor: pointer;
 
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: var(--header-font);
 
+}
+
+.fa-times {
+    font-size: 100px;
+}
+
+.fa-circle {
+    font-size: 82px;
+    position: absolute;
+}
+
+.fa-circle + .smaller {
+    font-size: 50px;
+    position: relative;
+    color: var(--background-grey);
 }
 
 /* Footer */
