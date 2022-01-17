@@ -4,7 +4,7 @@
     --primary-red: #8b0000;
     --display-font: 42px;
     --header-font: 34px;
-    --title-1-font: 18px;
+    --title-1-font: 26px;
     --body-font: 14px;
 
     --square-size: 150px;
@@ -31,13 +31,7 @@ h1 {
 
 /* Main */
 .main {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 70px;
-    max-width: 1250px;
-    margin: auto;
-    padding-bottom: 60px;
+    text-align: center;
 }
 
 p {
@@ -61,23 +55,66 @@ button:hover {
     color: var(--primary-dark);
 }
 
-/* Player and AI selection */
+/* Message header  */
+.message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    margin-bottom: 40px;
+
+    font-size: var(--header-font);
+    color: var(--primary-dark);
+}
+
+/* Game */
+.game-container {
+    display: flex;
+    align-items: center;
+    max-width: 1250px;
+    margin: auto;
+    gap: 70px;
+}
+
 .setup {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     padding-left: 20px;
     gap: 20px;
     width: 300px;
 }
 
-#player-count, #ai-select {
+#player-count {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
     width: 300px;
+}
+
+.player-1, .player-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; 
+}
+
+.player-2 {
+    visibility: hidden;
+}
+
+.player-2.active {
+    visibility: visible;
+}
+
+input {
+    border: none;
+    height: 30px;
+    padding: 5px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: var(--body-font);
 }
 
 .inactive {
@@ -138,13 +175,15 @@ input:checked + .slider:before {
 /* Gameboard  */
 #gameboard {
     position: relative;
-    top: 80px;
+    /* top: 80px; */
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(3, var(--square-size));
     grid-template-rows: repeat(3, var(--square-size));
     gap: 10px;
     background-color: darkgrey;
+
+    /* border: 1px solid blue; */
 }
 
 .square {

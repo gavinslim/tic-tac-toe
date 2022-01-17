@@ -17,43 +17,47 @@
     </div>
 
     <div class="main">  
-        <div class="setup">
-            <!-- Player count select  -->
-            <div id="player-count">
-                <div class="left-msg">Single Player</div>
-                <label class="switch"> 
-                    <input type="checkbox" id="player-toggle">
-                    <span class="slider"></span>
-                </label>
-                <div class="right-msg">Two Players</div>
-            </div>
-
-            <!-- AI select  -->
-            <!-- <div id="ai-select">
-                <div class="left-msg">AI Enable</div>
-                <label class="switch">
-                    <input type="checkbox" id="ai-toggle">
-                    <span class="slider"></span>
-                </label>
-                <div class="right-msg">AI Disable</div>
-            </div> -->
-
-            <button id="start">Start</button>
+        <div class="message">
+            Press 'Start' to begin
         </div>
-        <div id="gameboard">
-            <div class="square" id="00"></div>
-            <div class="square" id="01"></div>
-            <div class="square" id="02"></div>
-            <div class="square" id="10"></div>
-            <div class="square" id="11">
-                <div class="line" id="line"></div>
+        <div class="game-container">
+            <div class="setup">
+                <!-- Player count select  -->
+                <div id="player-count">
+                    <div class="left-msg">Single Player</div>
+                    <label class="switch"> 
+                        <input type="checkbox" id="player-toggle">
+                        <span class="slider"></span>
+                    </label>
+                    <div class="right-msg">Two Players</div>
+                </div>
+
+                <!-- Player input -->
+                <div class="player-1">
+                    <label for="p1-name">Player 1</label>
+                    <input type="text" id="p1-name">
+                </div>
+                <div class="player-2">
+                    <label for="p2-name">Player 2</label>
+                    <input type="text" id="p2-name">
+                </div>
+
+                <button id="start">Start</button>
             </div>
-            <div class="square" id="12"></div>
-            <div class="square" id="20"></div>
-            <div class="square" id="21"></div>
-            <div class="square" id="22"></div>      
+            <div id="gameboard">
+                <div class="square" id="00"></div>
+                <div class="square" id="01"></div>
+                <div class="square" id="02"></div>
+                <div class="square" id="10"></div>
+                <div class="square" id="11">
+                    <div class="line" id="line"></div>
+                </div>
+                <div class="square" id="12"></div>
+                <div class="square" id="20"></div>
+                <div class="square" id="21"></div>
+                <div class="square" id="22"></div>      
+            </div>
         </div>
-        
     </div>
 
     <div class="footer">
