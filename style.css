@@ -175,6 +175,55 @@ input:checked + .slider:before {
     color: var(--background-grey);
 }
 
+.line {
+    position: absolute;
+    background-color: red;
+    z-index: 1;
+
+    visibility: hidden;
+    width: 10px;
+    height: 12px;
+    padding-left: 220px;
+    padding-right: 220px;
+    transform: rotate(0deg);
+}
+
+.line.active {
+    visibility: visible;
+}
+
+.line.diag-neg {
+    transform: rotate(45deg);
+    padding-left: 270px;
+    padding-right: 270px;
+}
+
+.line.diag-pos {
+    transform: rotate(-45deg);
+    padding-left: 270px;
+    padding-right: 270px;
+}
+
+.line.row-top {
+    transform: translateY(-160px);
+}
+
+.line.row-bot {
+    transform: translateY(160px);
+}
+
+.line.col-mid {
+    transform: rotate(90deg);
+}
+
+.line.col-left {
+    transform: rotate(90deg) translateY(160px);
+}
+
+.line.col-right {
+    transform: rotate(90deg) translateY(-160px);
+}
+
 /* Footer */
 .footer {
     position: absolute;

@@ -3,6 +3,7 @@ const single_player = document.getElementById('player-toggle');
 const comp_container = document.getElementById('ai-select');
 const comp_enable = document.getElementById('ai-toggle');
 const start_button = document.getElementById('start');
+const win_line = document.getElementById('line');
 
 // Gameboard
 for (var i = 0; i < squares.length; i++) {
@@ -15,25 +16,22 @@ for (var i = 0; i < squares.length; i++) {
 
         // console.log(player1.active);
         if (player1.active == true) {
-            // console.log('true');
             player1.mark(row, col, 'X');
             player1.active = false;
         } else {
-            // console.log('false');
             player2.mark(row, col, 'O');
             player1.active = true;
         }
-        
     });
 }
 
 // Player and Computer Setup
 single_player.addEventListener('click', (e) => {
     if (single_player.checked == true) {
-        comp_container.classList.add('inactive');
-        comp_enable.checked = false;
+        // comp_container.classList.add('inactive');
+        // comp_enable.checked = false;
     } else {
-        comp_container.classList.remove('inactive');
+        // comp_container.classList.remove('inactive');
     }
 });
 
@@ -43,8 +41,9 @@ start_button.addEventListener('click', () => {
         start_button.innerHTML = 'Reset';
         gameboard.activate();
     } else {
-        start_button.innerHTML = 'Start';
+        start_button.innerHTML = 'Reset';
         gameboard.reset();
+        gameboard.activate();
     }    
 })
 
@@ -66,8 +65,17 @@ const gameboard = (() => {
                 _board[i][j] = '';
                 let element = document.getElementById(`${i}${j}`);
                 while(element.firstChild) element.removeChild(element.firstChild);
+
+                // Re-add line div
+                if ((i == 1) && (j == 1)) {
+                    let child = document.createElement('div');
+                    child.classList.add('line');
+                    child.setAttribute('id', 'line');
+                    element.appendChild(child);
+                }
             }
         } 
+        win_line.classList.remove('active');
         _active = false;      
     }
 
@@ -112,55 +120,115 @@ const gameboard = (() => {
             parent.appendChild(child1);
         }
 
-        gameboard.print();
+        let temp = check(row, col, marker);
     }
 
-    function look_around(row, col, marker) {
-        let min_row, max_row, min_col, max_col;
-        if (row == 0) {
-            min_row = 0;
-            max_row = row + 1;
-        } else if (row == 2) {
-            min_row = row - 1;
-            max_row = 2;
-        } else {
-            min_row = row - 1;
-            max_row = row + 1;
-        }
+    // Check horizontal
+    function check_horizontal(row, marker) {
 
-        if (col == 0) {
-            min_col = 0;
-            max_col = col + 1;
-        } else if (col == 2) {
-            min_col = col - 1;
-            max_col = 2;
-        } else {
-            min_col = col - 1;
-            max_col = col + 1;
-        }
-
-        if (_board[row][col] != marker) {
-            return false;
-        } 
-
-        for (let i = min_row; i = max_row; i++) {
-            for (let j = min_col; j = max_col; j++) {
-                return look_around(i, j, marker)
+        let i = row;
+        let horizontal_win = true;
+        for (let j = 0; j < 3; j++) {
+            if (_board[i][j] != marker) {
+                horizontal_win = false;
+                break;
             }
         }
+        return horizontal_win;
     }
 
-    const check = (row, col) => {
-        // Look around
+    // Check vertical
+    function check_vertical(col, marker) {
 
-        // for(let i = 0; i < 3; i++) {
-        //     for(let j = 0; j < 3; j++) {
-                
-        //     }
-        // }
+        let j = col;
+        let vertical_win = true;
+        for (let i = 0; i < 3; i++) {
+            if (_board[i][j] != marker) {
+                vertical_win = false;
+                break;
+            }
+        }
+        return vertical_win;
     }
 
-    return {reset, activate, print, mark};
+    // Check diagonal
+    function check_pos_diagonal(row, col, marker) {
+        let pos_diag_win = true;
+
+        // Skip if [0,1], [1,0], [1,2], [2,1]
+        if ((row == 1) != (col == 1)) {return false;}
+
+        // Skip if [0,0], [2,2]
+        if ((row == col) && (row != 1)) {return false;}
+
+        for (let i = 2; i >= 0; i--) {
+            let j = 2 - i;
+            if (_board[i][j] != marker) {
+                pos_diag_win = false;
+                break;
+            }
+        }
+        return pos_diag_win;
+    }
+
+    // Check diagonal
+    function check_neg_diagonal(row, col, marker) {
+        let neg_diag_win = true;
+
+        // Skip if [0,1], [1,0], [1,2], [2,1]
+        if ((row == 1) != (col == 1)) {return false;}
+
+        // Skip if [2,0], [0,2]
+        if (!(row == col)) {return false;}
+
+        for (let i = 0; i < 3; i++) {
+            let j = i;
+            if (_board[i][j] != marker) {
+                neg_diag_win = false;
+                break;
+            }
+        }      
+        return neg_diag_win; 
+    }
+
+    const check = (row, col, marker) => {
+        const line = document.getElementById('line');
+
+        if (check_horizontal(row, marker)) {
+            console.log(`${marker} wins! Horizontal win`);
+            line.classList.add('active');
+
+            if (row == 0) {line.classList.add('row-top');}
+            if (row == 2) {line.classList.add('row-bot');}
+            
+            _active = false;
+        }
+
+        if (check_vertical(col, marker)) {
+            console.log(`${marker} wins! Vertical win`);
+            line.classList.add('active');
+
+            if (col == 0) {line.classList.add('col-left');}
+            if (col == 1) {line.classList.add('col-mid')}
+            if (col == 2) {line.classList.add('col-right');}
+
+            _active = false;
+        }
+    
+        if (check_pos_diagonal(row, col, marker)) {
+            console.log(`${marker} wins! Positive diagonal win`);
+            line.classList.add('active', 'diag-pos');
+            _active = false;
+        }
+
+        if (check_neg_diagonal(row, col, marker)) {
+            console.log(`${marker} wins! Negative diagonal win`);
+            line.classList.add('active', 'diag-neg');
+            _active = false;
+        }
+    }
+
+    return {reset, activate, print, mark, check};
 
 })();
 
