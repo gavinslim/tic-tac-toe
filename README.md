@@ -1,2 +1,7 @@
-# tic-tac-toe
-Tic Tac Toe game using JS, HTML, CSS
+# The Odin Project: Tic-Tac-Toe
+
+Implementation of the Tic-Tac-Toe project from The Odin Project [curriculum](https://www.theodinproject.com/)
+
+[Live Demo](http://gavinslim.com/tic-tac-toe/) :point_left:
+
+
